@@ -10,6 +10,7 @@ use Login\LoginBundle\Modals\Login;
 use Login\LoginBundle\Entity\Student;
 use Login\LoginBundle\Entity\Room;
 use Login\LoginBundle\Entity\Occupy;
+use Login\LoginBundle\Entity\Work;
 
 class DefaultController extends Controller {
 
@@ -222,6 +223,22 @@ class DefaultController extends Controller {
             $em->flush();
         }
         return $this->render('LoginLoginBundle:Default:halladd.html.twig');
+    }
+    
+    public function assignworkAction(Request $request) {
+        if ($request->getMethod() == 'POST') {
+            $employeeid = $request->get('employeeid');
+            $date = $request->get('date');
+            $hallname = $request->get('hallname');
+            $work = new Work();
+            $work->setHallname($hallname);
+            $work->setEmployeeid($employeeid);
+            $work->setDate($date);
+            $em = $this->getDoctrine()->getEntityManager();
+            $em->persist($work);
+            $em->flush();
+        }
+        return $this->render('LoginLoginBundle:Default:assignwork.html.twig');
     }
 
     public function halleditAction(Request $request) {
