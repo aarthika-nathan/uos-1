@@ -197,6 +197,11 @@ class appdevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
             return array (  '_controller' => 'Login\\LoginBundle\\Controller\\DefaultController::halladdAction',  '_route' => 'login_login_halladd',);
         }
 
+        // login_login_assignwork
+        if ($pathinfo === '/assignwork') {
+            return array (  '_controller' => 'Login\\LoginBundle\\Controller\\DefaultController::assignworkAction',  '_route' => 'login_login_assignwork',);
+        }
+
         // login_login_halledit
         if ($pathinfo === '/halledit') {
             return array (  '_controller' => 'Login\\LoginBundle\\Controller\\DefaultController::halleditAction',  '_route' => 'login_login_halledit',);

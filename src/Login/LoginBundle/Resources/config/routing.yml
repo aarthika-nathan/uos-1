@@ -26,6 +26,10 @@ login_login_halladd:
     pattern:  /halladd 
     defaults: { _controller: LoginLoginBundle:Default:halladd }
     
+login_login_assignwork:
+    pattern:  /assignwork 
+    defaults: { _controller: LoginLoginBundle:Default:assignwork }
+    
 login_login_halledit:
     pattern:  /halledit 
     defaults: { _controller: LoginLoginBundle:Default:halledit }    
