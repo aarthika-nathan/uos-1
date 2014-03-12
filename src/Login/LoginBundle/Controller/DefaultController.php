@@ -358,15 +358,19 @@ class DefaultController extends Controller {
 
     public function occupyAddAction(Request $request) {
         if ($request->getMethod() == 'POST') {
+            $studentno = $request->get('studentno');
             $hallname = $request->get('hallname');
-            $capacity = $request->get('capacity');
-            $gender = $request->get('gender');
-            $hall = new Hall();
-            $hall->setHallname($hallname);
-            $hall->setCapacity($capacity);
-            $hall->setGender($gender);
+            $roomno = $request->get('roomno');
+            $occupieddate=  \DateTime::createFromFormat('Y-m-d',date('Y-m-d') );
+                        
+            $occupy = new Occupy22();
+            $occupy->setStudentno($studentno);
+            $occupy->setHallname($hallname);
+            $occupy->setRoomno($roomno);
+            $occupy->setOccupieddate($occupieddate );
+            
             $em = $this->getDoctrine()->getEntityManager();
-            $em->persist($hall);
+            $em->persist($occupy);
             $em->flush();
         }
         return $this->render('LoginLoginBundle:Default:occupyAdd.html.twig');
@@ -406,17 +410,10 @@ class DefaultController extends Controller {
             if ($roomno != null) {
                 $occupy->setRoomno($roomno);
             }
-            $date = DateTime::createFromFormat('j-M-Y', '15-Feb-2009');
-            $date->format('Y-m-d');
-            $occupy->setDate($date);
+            $occupy->setDate(\DateTime::createFromFormat('Y-m-d',date('Y-m-d')));
+                    
+            $occupy->setLastedit(\DateTime::createFromFormat('Y-m-d',date('Y-m-d')));
             
-            $lastedit = DateTime::createFromFormat('j-M-Y', '15-Feb-2009');
-            $lastedit->format('Y-m-d');            
-            $occupy->setLastedit($lastedit);
-            
-
-            $occupy->setLastedit($lastedit);
-
             $em->flush();
         }
         return $this->render('LoginLoginBundle:Default:login.html.twig', array('name' => $indnum));
